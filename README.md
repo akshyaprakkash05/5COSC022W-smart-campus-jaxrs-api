@@ -41,9 +41,9 @@ The project is organised into the following packages:
 - **store** – in-memory data storage using collections
 
 ## Base URL
-The API is accessed via: 
+The API is accessed via:
 
-http://localhost:8080/api/v1
+http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1
 
 
 When deployed via NetBeans and Tomcat, the application may include a context path:
@@ -83,67 +83,58 @@ This depends on the deployment configuration, but the API root remains `/api/v1`
 
 ### Discovery Endpoint
 ```bash
-curl -X GET http://localhost:8080/api/v1
+curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1
 ```
-
-### Get All Rooms
+Get All Rooms
 ```bash
-curl -X GET http://localhost:8080/api/v1/rooms
+curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms
 ```
-
-### Create Room
+Create Room
 ```bash
-curl -X POST http://localhost:8080/api/v1/rooms \
+curl -X POST http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms \
 -H "Content-Type: application/json" \
 -d "{\"id\":\"ART-201\",\"name\":\"Art Studio\",\"capacity\":25}"
 ```
-
-### Get One Room
+Get One Room
 ```bash
-curl -X GET http://localhost:8080/api/v1/rooms/ART-201
+curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms/ART-201
 ```
-
-### Delete Room
+Delete Room
 ```bash
-curl -X DELETE http://localhost:8080/api/v1/rooms/ART-201
+curl -X DELETE http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms/ART-201
 ```
-
-### Get Sensors
+Get Sensors
 ```bash
-curl -X GET http://localhost:8080/api/v1/sensors
+curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors
 ```
-
-### Filter Sensors
+Filter Sensors
 ```bash
-curl -X GET "http://localhost:8080/api/v1/sensors?type=CO2"
+curl -X GET "http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors?type=CO2"
 ```
-
-### Create Sensor
+Create Sensor
 ```bash
-curl -X POST http://localhost:8080/api/v1/sensors \
+curl -X POST http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors \
 -H "Content-Type: application/json" \
 -d "{\"id\":\"CO2-101\",\"type\":\"CO2\",\"status\":\"ACTIVE\",\"currentValue\":415.0,\"roomId\":\"ART-201\"}"
 ```
-
-### Update Sensor Status
+Update Sensor Status
 ```bash
-curl -X PUT http://localhost:8080/api/v1/sensors/CO2-101/status \
+curl -X PUT http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors/CO2-101/status \
 -H "Content-Type: application/json" \
 -d "\"MAINTENANCE\""
 ```
-
-### Get Sensor Readings
+Get Sensor Readings
 ```bash
-curl -X GET http://localhost:8080/api/v1/sensors/CO2-101/readings
+curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors/CO2-101/readings
 ```
-
-### Add Sensor Reading
+Add Sensor Reading
 ```bash
-curl -X POST http://localhost:8080/api/v1/sensors/CO2-101/readings \
+curl -X POST http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors/CO2-101/readings \
 -H "Content-Type: application/json" \
 -d "{\"id\":\"R-001\",\"timestamp\":1713950000000,\"value\":420.5}"
 ```
 
+---
 ## Report Answers
 Part 1: Service Architecture & Setup
 1.1 Resource Lifecycle
