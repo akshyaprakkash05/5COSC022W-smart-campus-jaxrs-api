@@ -15,6 +15,10 @@ import javax.ws.rs.core.MediaType;
  * DiscoveryResource provides a lightweight entry point that documents
  * the main API resources available in the Smart Campus system.
  */
+/**
+ * Author: Akshya Prakkash Vanitha
+ * Student ID: w2083025
+ */
 @Path("")
 public class DiscoveryResource {
 
