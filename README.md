@@ -135,7 +135,7 @@ curl -X POST http://localhost:8080/HelloWorld1/api/v1/sensors/CO2-101/readings \
 
 ---
 ## Report Answers
-Part 1: Service Architecture & Setup
+### Part 1: Service Architecture & Setup
 1.1 Resource Lifecycle
 In JAX-RS, resource classes are typically instantiated per request. This means a new object is created for each incoming HTTP request, ensuring that instance variables are not shared across requests.
 To maintain persistent application data, this implementation uses static collections in the CampusStore class. These collections store rooms, sensors, and sensor readings, ensuring that data is preserved across multiple requests.
@@ -145,7 +145,7 @@ Since these collections are shared across threads, there is a potential risk of 
 Hypermedia enables clients to dynamically navigate an API using links provided in responses. This reduces dependency on static documentation and improves flexibility.
 In this API, the discovery endpoint provides entry-level navigation information, allowing clients to understand available resources. This approach improves maintainability and supports extensibility, as clients do not need to hardcode endpoint structures.
 
-Part 2: Room Management
+### Part 2: Room Management
 2.1 Returning IDs vs Full Objects
 Returning only IDs reduces payload size and improves performance, especially for large datasets. However, it requires additional requests from the client to retrieve full details.
 Returning full objects increases response size but simplifies client-side processing. In this implementation, full objects are returned to prioritise usability and clarity.
@@ -154,7 +154,7 @@ Returning full objects increases response size but simplifies client-side proces
 The DELETE operation is idempotent. Once a room is deleted, repeating the same DELETE request does not change the system state further.
 If the room no longer exists, a 404 response is returned. If the room still has sensors linked, a 409 conflict is returned. In all cases, repeated requests do not introduce new side effects.
 
-Part 3: Sensor Operations & Linking
+### Part 3: Sensor Operations & Linking
 3.1 @Consumes Behaviour
 The API explicitly consumes JSON using @Consumes(MediaType.APPLICATION_JSON). If a client sends data in another format, such as XML or plain text, the request is rejected with a 415 Unsupported Media Type response.
 3.2 Query Parameters vs Path Parameters
@@ -162,10 +162,10 @@ Query parameters are used for filtering because they provide flexibility. For ex
 /api/v1/sensors?type=CO2
 This keeps the endpoint structure consistent while allowing optional filters. Path parameters are more rigid and do not scale well for multiple filtering conditions.
 
-### 3.3 PUT Idempotency
+3.3 PUT Idempotency
 The PUT operation used for updating sensor status is idempotent. Repeating the same request results in the same final state, which aligns with REST principles.
 
-Part 4: Sub-Resources and Data Management
+### Part 4: Sub-Resources and Data Management
 4.1 Sub-Resource Locator Pattern
 The API uses a sub-resource locator to manage sensor readings:
 /sensors/{sensorId}/readings
@@ -175,7 +175,7 @@ This delegates responsibility to a separate class (SensorReadingResource), impro
 When a new sensor reading is added, it is stored in the sensor’s reading history and also updates the sensor’s current value.
 This ensures consistency between historical data and the latest sensor state. Without this, the system could return outdated values.
 
-Part 5: Error Handling & Logging
+### Part 5: Error Handling & Logging
 5.1 HTTP 422 vs 404
 HTTP 422 is used when a request is syntactically valid but contains invalid data. For example, linking a sensor to a non-existent room.
 This is more accurate than 404, which indicates that the resource itself could not be found.
@@ -189,8 +189,6 @@ Logging is implemented using JAX-RS filters instead of manually adding logging s
 This centralises logging logic, reduces code duplication, and ensures consistent logging across all API endpoints.
 
 ## Summary
-## Summary
-
 This Smart Campus API demonstrates a complete RESTful design using JAX-RS, including:
 
 - structured resource design  
