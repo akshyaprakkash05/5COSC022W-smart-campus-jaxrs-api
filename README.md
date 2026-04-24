@@ -43,12 +43,12 @@ The project is organised into the following packages:
 ## Base URL
 The API is accessed via:
 
-http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1
+http://localhost:8080/HelloWorld1/api/v1
 
 
-When deployed via NetBeans and Tomcat, the application may include a context path:
+When deployed via NetBeans and Tomcat, the application includes the context path:
 
-http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1
+http://localhost:8080/HelloWorld1/api/v1
 This depends on the deployment configuration, but the API root remains `/api/v1`.
 
 
@@ -73,63 +73,62 @@ This depends on the deployment configuration, but the API root remains `/api/v1`
 
 - **200 OK** – Successful retrieval
 - **201 Created** – Resource successfully created
-- **404 Not Found** – Resource does not exist
 - **409 Conflict** – Invalid operation (e.g. deleting room with sensors)
+- **403 Forbidden** – Operation not allowed (e.g. adding readings to a sensor under maintenance)
 - **422 Unprocessable Entity** – Invalid reference (e.g. sensor linked to non-existent room)
-- **415 Unsupported Media Type** – Invalid request format
 - **500 Internal Server Error** – Unexpected failures
 
 ## Sample curl Commands
 
 ### Discovery Endpoint
 ```bash
-curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1
+curl -X GET http://localhost:8080/HelloWorld1/api/v1
 ```
 Get All Rooms
 ```bash
-curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms
+curl -X GET http://localhost:8080/HelloWorld1/api/v1/rooms
 ```
 Create Room
 ```bash
-curl -X POST http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms \
+curl -X POST http://localhost:8080/HelloWorld1/api/v1/rooms \
 -H "Content-Type: application/json" \
 -d "{\"id\":\"ART-201\",\"name\":\"Art Studio\",\"capacity\":25}"
 ```
 Get One Room
 ```bash
-curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms/ART-201
+curl -X GET http://localhost:8080/HelloWorld1/api/v1/rooms/ART-201
 ```
 Delete Room
 ```bash
-curl -X DELETE http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/rooms/ART-201
+curl -X DELETE http://localhost:8080/HelloWorld1/api/v1/rooms/ART-201
 ```
 Get Sensors
 ```bash
-curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors
+curl -X GET http://localhost:8080/HelloWorld1/api/v1/sensors
 ```
 Filter Sensors
 ```bash
-curl -X GET "http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors?type=CO2"
+curl -X GET "http://localhost:8080/HelloWorld1/api/v1/sensors?type=CO2"
 ```
 Create Sensor
 ```bash
-curl -X POST http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors \
+curl -X POST http://localhost:8080/HelloWorld1/api/v1/sensors \
 -H "Content-Type: application/json" \
 -d "{\"id\":\"CO2-101\",\"type\":\"CO2\",\"status\":\"ACTIVE\",\"currentValue\":415.0,\"roomId\":\"ART-201\"}"
 ```
 Update Sensor Status
 ```bash
-curl -X PUT http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors/CO2-101/status \
+curl -X PUT http://localhost:8080/HelloWorld1/api/v1/sensors/CO2-101/status \
 -H "Content-Type: application/json" \
 -d "\"MAINTENANCE\""
 ```
 Get Sensor Readings
 ```bash
-curl -X GET http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors/CO2-101/readings
+curl -X GET http://localhost:8080/HelloWorld1/api/v1/sensors/CO2-101/readings
 ```
 Add Sensor Reading
 ```bash
-curl -X POST http://localhost:8080/SmartCampusAPI-1.0-SNAPSHOT/api/v1/sensors/CO2-101/readings \
+curl -X POST http://localhost:8080/HelloWorld1/api/v1/sensors/CO2-101/readings \
 -H "Content-Type: application/json" \
 -d "{\"id\":\"R-001\",\"timestamp\":1713950000000,\"value\":420.5}"
 ```
@@ -190,11 +189,15 @@ Logging is implemented using JAX-RS filters instead of manually adding logging s
 This centralises logging logic, reduces code duplication, and ensures consistent logging across all API endpoints.
 
 ## Summary
+## Summary
+
 This Smart Campus API demonstrates a complete RESTful design using JAX-RS, including:
--	structured resource design 
--	filtering with query parameters 
--	nested sub-resources 
--	proper HTTP status handling 
--	exception mapping 
--	logging via filters 
--	in-memory data storage 
+
+- structured resource design  
+- filtering with query parameters  
+- nested sub-resources  
+- proper HTTP status handling  
+- exception mapping  
+- logging via filters  
+- in-memory data storage  
+This above implementation follows REST principles and demonstrates a clear understanding of client-server architecture, resource management and robust error handling.
